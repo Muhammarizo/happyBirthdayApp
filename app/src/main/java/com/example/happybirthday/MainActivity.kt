@@ -16,7 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +35,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    GreetingImage(message = "Happy Birthday Sam!", from = "From Emma")
+                    GreetingImage(
+                        message = stringResource(R.string.happy_birthday_sam),
+                        from = stringResource(
+                            R.string.signature_text
+                        ),
+                    )
                 }
             }
         }
@@ -59,8 +66,7 @@ fun GreetingText(modifier: Modifier = Modifier, message: String, from: String) {
             text = from,
             fontSize = 36.sp,
             modifier = Modifier
-                .padding(all = 16.dp)
-                .align(alignment = Alignment.End)
+                .padding(all = 16.dp).align(alignment = Alignment.CenterHorizontally)
 
         )
     }
@@ -74,6 +80,8 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
         Image(
             painter = image,
             contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
         )
         GreetingText(
             message = message,
